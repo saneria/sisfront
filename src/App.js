@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "./components/user/Login";
-import Home from "./components/Home";
+import Image from "./components/user/Ocr";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/image" element={<Image />} />
 
       </Routes>
     </>

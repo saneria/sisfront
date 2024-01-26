@@ -20,7 +20,7 @@ function Login() {
       const data = response.data;
       console.log(data);
 
-      navigate("/home");
+      navigate("/image");
 
       toast.success("Login successful!");
       console.log("User Login Successful");
