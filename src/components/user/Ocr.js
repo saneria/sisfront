@@ -18,7 +18,7 @@ function Image() {
       const data = response.data;
       console.log(data);
 
-      setUploadedImageUrl(data.url); // Assuming response contains URL of uploaded image
+      setUploadedImageUrl(data.url); 
 
       console.log("Image Uploaded Successfully");
     } catch (error) {

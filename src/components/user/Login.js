@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import "react-toastify/dist/ReactToastify.css";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -20,7 +18,18 @@ function Login() {
       const data = response.data;
       console.log(data);
 
-      navigate("/image");
+      const role = data.user.role;
+      localStorage.setItem("role", role);
+      console.log(role);
+
+      if(role === "Personnel"){
+        navigate("/homepage");
+      }
+      else if (role === "Admin"){
+        navigate("/adminpage");
+      }
+
+
 
       toast.success("Login successful!");
       console.log("User Login Successful");
@@ -30,37 +39,53 @@ function Login() {
   };
 
   return (
-    <Container>
-      <Row className="justify-content-md-center">
-        <Col xs={12} md={6}>
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
-
-            <Button variant="primary" type="button" onClick={handleLogin}>
+    <div className="mx-auto mt-10 max-w-md">
+      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Email address:
+            </label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Password:
+            </label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              type="button"
+              onClick={handleLogin}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
               Login
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 
